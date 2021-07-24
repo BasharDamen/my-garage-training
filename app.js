@@ -1,115 +1,157 @@
 'use strict';
-
 Cars.globalArray = [];
 
-function Cars(name, model, year, path){
-    this.name = name
+function Cars(name, model, year, image) {
+    
+    this.name = name;
     this.model = model;
     this.year = year;
-    this.path = path;
+    this.image = image;
 
     Cars.globalArray.push(this);
+
 }
 
-// function question2() {
-//     let x = "*"
-//     for (let i = 0; i < 5; i++) {
-//         console.log(x);
-//         x = x + "*";
-//     }
+
+
+let parentDiv = document.getElementById('myCars')
+
+Cars.prototype.renderTable = function(){
+    let table = document.createElement('table');
+    parentDiv.appendChild(table);
     
-// }
-// question2();
+    let carRow = document.createElement('tr');
+    table.appendChild(carRow);
 
-// new Cars('BMW', 'imgs/bmw.png');
-// new Cars('Lexus', 'imgs/lexus.png');
-// new Cars('Toyota', 'imgs/toyota.png');
-// new Cars('Tesla', 'imgs/tesla.png');
-// new Cars('Chevrolet', 'imgs/chevrolet.png');
-// new Cars('Hyundai', 'imgs/hyundai.png');
-// new Cars('Kia', 'imgs/hyundai.png');
+    let td1 = document.createElement('td');
+    carRow.appendChild(td1);
 
+    let img = document.createElement('img');
+    img.src = this.image;
+    td1.appendChild(img);
+
+    let td2 = document.createElement('td');
+    carRow.appendChild(td2);
+    td2.textContent = this.name;
+
+    let td3 = document.createElement('td');
+    carRow.appendChild(td3);
+    td3.textContent = this.model;
+    
+    let td4 = document.createElement('td');
+    carRow.appendChild(td4);
+    td3.textContent = this.year;  
+    
+
+
+}
+
+
+let removeBtn;
+function rendering(){
+    let table = document.createElement('table');
+    parentDiv.appendChild(table);
+    
+    for (let i = 0; i < Cars.globalArray.length; i++) {
+        
+        
+        let carRow = document.createElement('tr');
+        table.appendChild(carRow);
+    
+        let td1 = document.createElement('td');
+        carRow.appendChild(td1);
+    
+        let img = document.createElement('img');
+        img.src = `imgs/${Cars.globalArray[i].model}.png`;
+        td1.appendChild(img);
+    
+        let td2 = document.createElement('td');
+        carRow.appendChild(td2);
+        td2.textContent = Cars.globalArray[i].name;
+    
+        let td3 = document.createElement('td');
+        carRow.appendChild(td3);
+        td3.textContent = Cars.globalArray[i].model;
+        
+        let td4 = document.createElement('td');
+        carRow.appendChild(td4);
+        td3.textContent = Cars.globalArray[i].year;
+
+        removeBtn = document.createElement('input');
+        removeBtn.type = 'button';
+        removeBtn.value = 'Remove Item';
+        carRow.appendChild(removeBtn);
+        removeBtn.addEventListener('click', handleRemove);
+
+        function handleRemove(event, i){
+            
+            Cars.globalArray.splice(i, 1);
+            location.reload();
+            saveToLocal();
+        }
+    }
+
+}
+
+
+
+
+// adding event
+let myCarForm = document.getElementById('itemsForm')
+
+myCarForm.addEventListener('submit', handleClick);
+let myNewCar;
+function handleClick(event){
+    // event.preventDefault();
+
+    let carName = event.target.carName.value;
+
+    let carModel = event.target.carModel.value;
+
+    let modelYear = event.target.modelYear.value
+
+    new Cars(carName, carModel, modelYear, `imgs/${carModel}.png`);
+    saveToLocal();
+    // rendering();
+    console.log(Cars.globalArray);
+    
+    
+}
+
+
+// clear event
+
+let clearbtn = document.getElementById('clear');
+clearbtn.addEventListener('click', handleClear);
+
+function handleClear(){
+
+    if (confirm('Are you sure you want to delete all items?')) {
+        localStorage.clear();
+        location.reload();
+        
+    }else{
+        return;
+    }
+}
+
+
+// set and get items
+function saveToLocal(){
+    localStorage.setItem('Cars', JSON.stringify(Cars.globalArray))
+}
+
+function getFromLocal(){
+    let convertedData = JSON.parse(localStorage.getItem('Cars'))
+
+    if (convertedData !== null) {
+        Cars.globalArray = convertedData;
+        
+        rendering(); 
+    }
+    
+}
+
+getFromLocal();
 console.log(Cars.globalArray);
 
-let myCarsForm = document.getElementById('itemsForm');
-// let nameInput = document.getElementById('carName');
-// let modelSelect = document.getElementById('carModel');
-// let addBtn = document.getElementById('addItem')
-// ................................
-
-
-
-
-
-myCarsForm.addEventListener('submit', handleClick);
-
-
-
-
-
-
-
-function handleClick(event) {
-    event.preventDefault();
-
-    console.log(event);
-    
-        
-    let nameField = event.target.carName.value;
-    console.log(nameField);
-
-    let modelField = event.target.carModel.value;
-    console.log(modelField);
-
-
-    let yearField = event.target.modelYear.value;
-    console.log(yearField);
-
-    let newCar = new Cars(nameField, modelField, yearField, `imgs/${modelField}.png` );
-
-    console.log(newCar);
-    
-    renderList();
-    saveToLocal();
-    // Cars.globalArray = [];
-    console.log(Cars.globalArray);
-}
-
-
-
-
-let carsDiv = document.getElementById('myCars');
-
-
-function renderList(){
-    let ul = document.createElement('ul')
-    carsDiv.appendChild(ul)
-    for (let i = 0; i < Cars.globalArray.length; i++) {
-        let li = document.createElement('li');
-        ul.appendChild(li);
-        
-        let img = document.createElement('img');
-        img.src = Cars.globalArray[i].path
-        li.appendChild(img);
-        
-        let info = document.createElement('p');
-        li.appendChild(info);
-        info.textContent = `${Cars.globalArray[i].name} - ${Cars.globalArray[i].model} - ${Cars.globalArray[i].year}`
-    }
-    // myCarsForm.removeEventListener('submit', handleClick)
-
-}
-
-function saveToLocal() {
-    localStorage.setItem('Cars',JSON.stringify( Cars.globalArray))
-    
-}
-
-function getFromLocal() {
-    let ConvertedData= JSON.parse(localStorage.getItem('Cars'))
-    if(ConvertedData!==null){
-        Cars.globalArray=ConvertedData
-        renderList();
-    }
-}
-getFromLocal();

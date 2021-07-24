@@ -16,29 +16,38 @@
             <div id="formDiv">
                 <form id="itemsForm">
                     <fieldset>
-                        <label for="carName">Car Name:</label>
-                        <input type="text" id="carName" required>
-                        
-                        <label for="carModel">Model:</label>
-                        <select id="carModel" >
-                            <option value="BMW">BMW</option>
-                            <option value="Lexus">Lexus</option>
-                            <option value="Toyota">Toyota</option>
-                            <option value="Tesla">Tesla</option>
-                            <option value="Chevrolet">Chevrolet</option>
-                            <option value="Hyundai">Hyundai</option>
-                            <option value="Kia">Kia</option>
-                        </select>
-                        
-                        <label for="modelYear">Model Year</label>
-                        <select id="modelYear">
-                            <option value="2018">2018</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                        </select>
-                    
-                        <input type="submit" value="submit">
+                        <div class="row">
+                            <label for="carName">Car Name:</label>
+                            <input type="text" id="carName" required>
+                        </div>
+                        <div class="row">
+                            <label for="carModel">Model:</label>
+                            <select id="carModel" >
+                                <option value="BMW">BMW</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Tesla">Tesla</option>
+                                <option value="Chevrolet">Chevrolet</option>
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Kia">Kia</option>
+                            </select>
+
+                        </div>
+                        <div class="row">
+                            <label for="modelYear">Model Year</label>
+                            <select id="modelYear">
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>
+
+                        </div>
+                        <div class="inputes">
+                            <input type="submit" value="submit">
+                            <input type="button" value="Remove All Items" id="clear">
+
+                        </div>
 
                     </fieldset>
                 </form>

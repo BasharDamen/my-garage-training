@@ -15,10 +15,19 @@ div#formDiv {
 
 
 form {
-    width: 25%;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    justify-content: space-around;
 }
 
 form input {
@@ -40,18 +49,53 @@ form button {
 }
 
 
+.row {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+}
+
+.inputes {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 
 div#myCars {
     width: 70%;
-    border: dashed gray;
-    background-color: #d0d0d080;
+    height: 400px;
+    overflow: overlay;
+
 }
 
 img {
-    width: 75px;
+    width: inherit;
 }
-div#myCars ul li {
+
+table {
+    width: 100%;
+    border: dashed gray;
+    background-color: #d0d0d080;
+    height: inherit;
+}
+
+tr {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-around;
+    height: 82px;
 }
+
+td {
+    width: 50px;
+    text-align: center;
+}
+/* div#myCars ul li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+} */
