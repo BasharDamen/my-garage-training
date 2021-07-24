@@ -47,10 +47,15 @@ Cars.prototype.renderTable = function(){
 }
 
 
+
+
 let removeBtn;
+
+
 function rendering(){
     let table = document.createElement('table');
     parentDiv.appendChild(table);
+    
     
     for (let i = 0; i < Cars.globalArray.length; i++) {
         
@@ -75,7 +80,7 @@ function rendering(){
         
         let td4 = document.createElement('td');
         carRow.appendChild(td4);
-        td3.textContent = Cars.globalArray[i].year;
+        td4.textContent = Cars.globalArray[i].year;
 
         removeBtn = document.createElement('input');
         removeBtn.type = 'button';
